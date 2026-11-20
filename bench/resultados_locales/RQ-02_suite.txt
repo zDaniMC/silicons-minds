@@ -1,0 +1,52 @@
+make: Entering directory '/home/joanr/silicon-minds-huella/native'
+./run_tests.sh
+Referencia: sha256sum contra libhuella (bloques de 64 KB y de 1024 bytes)
+  OK     vacio (bloque 65536) == sha256sum
+  OK     vacio (bloque 1024) == sha256sum
+  OK     abc (bloque 65536) == sha256sum
+  OK     abc (bloque 1024) == sha256sum
+  OK     borde_55 (bloque 65536) == sha256sum
+  OK     borde_55 (bloque 1024) == sha256sum
+  OK     borde_56 (bloque 65536) == sha256sum
+  OK     borde_56 (bloque 1024) == sha256sum
+  OK     borde_64 (bloque 65536) == sha256sum
+  OK     borde_64 (bloque 1024) == sha256sum
+  OK     primo_100003 (bloque 65536) == sha256sum
+  OK     primo_100003 (bloque 1024) == sha256sum
+  OK     grande_10MB (bloque 65536) == sha256sum
+  OK     grande_10MB (bloque 1024) == sha256sum
+
+Casos autocontenidos
+RN-01  Huella de un bloque; vectores publicados del estándar
+  OK     cadena vacía
+  OK     "abc"
+  OK     vector de dos bloques del estándar (448 bits)
+RN-02  Lectura por bloques equivalente a una sola pasada (100003 bytes, tamaño primo)
+  OK     64 KB == una pasada
+  OK     1024 bytes == una pasada
+  OK     7 bytes == una pasada
+RN-04  Efecto avalancha: 20 pares que difieren en un solo bit
+         media 50.1 % (mínimo 47.3 %, máximo 53.5 %)
+  OK     porcentaje medio de bits distintos entre 45 % y 55 %
+  OK     ningún par cerca de 0 (implementación sana)
+RN-05  Huella reducida
+  OK     16 bits: coinciden con los primeros bits de la completa
+  OK     24 bits: coinciden con los primeros bits de la completa
+  OK     12 bits: el último byte lleva ceros en los bits sobrantes
+         colisión de 16 bits tras 394 intentos en 0.0002 s (entradas 145 y 393)
+  OK     con 16 bits se hallan dos entradas distintas con la misma salida en segundos
+RN-06  Sin fugas: 10 000 ciclos crear/actualizar/finalizar/liberar
+         memoria residente: 2624 KB antes, 2624 KB después
+  OK     la memoria residente no aumenta (una fuga de 10 000 estados serían ~1,2 MB; tolerancia 256 KB)
+Contrato  Convención de errores (sin excepciones, funciones void)
+  OK     con estado NULL no hacen nada ni se caen
+  OK     longitud negativa, cero o bloque NULL no alteran el estado
+  OK     finalizar dos veces da lo mismo (el estado no se destruye)
+  OK     huella_reducida con n_bits inválido no escribe
+17 casos, 0 fallas
+
+  OK     valgrind: 2000 ciclos sin fugas ni accesos inválidos
+
+32 casos en 1.1 s (límite RQ-02: 30 s, mínimo 10 casos)
+TODO EN VERDE
+make: Leaving directory '/home/joanr/silicon-minds-huella/native'

@@ -1,0 +1,51 @@
+ Image siliconminds/huella-service:1.0.0 Building 
+ Image siliconminds/huella-service:1.0.0 Built 
+ Network silicon-minds-huella_default Creating 
+ Network silicon-minds-huella_default Creating 
+ Network silicon-minds-huella_default Created 
+ Network silicon-minds-huella_default Created 
+ Container silicon-minds-huella-huella-service-1 Creating 
+ Container silicon-minds-huella-huella-service-1 Created 
+ Container silicon-minds-huella-huella-service-1 Starting 
+ Container silicon-minds-huella-huella-service-1 Started 
+1,96.3,7.8
+ Image siliconminds/huella-service:1.0.0 Building 
+ Image siliconminds/huella-service:1.0.0 Built 
+ Network silicon-minds-huella_default Creating 
+ Network silicon-minds-huella_default Creating 
+ Network silicon-minds-huella_default Created 
+ Network silicon-minds-huella_default Created 
+ Container silicon-minds-huella-huella-service-1 Creating 
+ Container silicon-minds-huella-huella-service-1 Created 
+ Container silicon-minds-huella-huella-service-1 Starting 
+ Container silicon-minds-huella-huella-service-1 Started 
+2,94.5,7.4
+ Image siliconminds/huella-service:1.0.0 Building 
+ Image siliconminds/huella-service:1.0.0 Built 
+ Network silicon-minds-huella_default Creating 
+ Network silicon-minds-huella_default Creating 
+ Network silicon-minds-huella_default Created 
+ Network silicon-minds-huella_default Created 
+ Container silicon-minds-huella-huella-service-1 Creating 
+ Container silicon-minds-huella-huella-service-1 Created 
+ Container silicon-minds-huella-huella-service-1 Starting 
+ Container silicon-minds-huella-huella-service-1 Started 
+3,92.9,7.7
+--- tamaño de la imagen (RQ-03: < 250 MB) ---
+siliconminds/huella-service:1.0.0  450MB
+--- capas: lo que cuesta la biblioteca nativa ---
+0B	ENTRYPOINT ["java" "-jar" "/app/huella-servi…
+0B	EXPOSE [8080/tcp]
+0B	USER 10001
+0B	ENV JAVA_TOOL_OPTIONS=-Djna.library.path=/op…
+22MB	COPY /build/target/huella-service-1.0.0.jar …
+32.8kB	COPY /src/libhuella.so /opt/huella/lib/libhu…
+3.3MB	RUN /bin/sh -c useradd --system --uid 10001 …
+0B	ENTRYPOINT ["/__cacert_entrypoint.sh"]
+12.3kB	COPY --chmod=755 entrypoint.sh /__cacert_ent…
+12.3kB	RUN /bin/sh -c set -eux;     echo "Verifying…
+166MB	RUN /bin/sh -c set -eux;     ARCH="$(dpkg --…
+0B	ENV JAVA_VERSION=jdk-21.0.13+9
+--- ¿tiene gcc la imagen final? (debe decir 'no') ---
+no
+--- Dockerfile de una sola etapa (comparación): ver BITACORA.md D-08 ---

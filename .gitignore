@@ -1,0 +1,5 @@
+native/libhuella.so
+native/test_huella
+huella-service/target/
+bench/resultados/
+*.class

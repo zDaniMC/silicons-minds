@@ -1,0 +1,8 @@
+**/target
+native/libhuella.so
+native/test_huella
+native/run_tests.sh
+native/test_huella.c
+bench
+*.md
+.git

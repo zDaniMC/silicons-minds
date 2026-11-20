@@ -1,0 +1,133 @@
+ Image siliconminds/huella-service:1.0.0 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 572B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.94kB done
+#2 DONE 0.0s
+
+#3 resolve image config for docker-image://docker.io/docker/dockerfile:1
+#3 DONE 0.7s
+
+#4 docker-image://docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
+#4 resolve docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e 0.0s done
+#4 CACHED
+
+#5 [internal] load metadata for docker.io/library/ubuntu:22.04
+#5 ...
+
+#6 [internal] load metadata for docker.io/library/maven:3.9-eclipse-temurin-21-jammy
+#6 DONE 0.5s
+
+#5 [internal] load metadata for docker.io/library/ubuntu:22.04
+#5 DONE 0.5s
+
+#7 [internal] load metadata for docker.io/library/eclipse-temurin:21-jre-jammy
+#7 DONE 0.6s
+
+#8 [internal] load .dockerignore
+#8 transferring context: 146B done
+#8 DONE 0.0s
+
+#9 [nativo 1/5] FROM docker.io/library/ubuntu:22.04@sha256:74b12b11ffa550fba1929ad4d8d16533c34f6612728469671afba1b03b66881c
+#9 resolve docker.io/library/ubuntu:22.04@sha256:74b12b11ffa550fba1929ad4d8d16533c34f6612728469671afba1b03b66881c 0.0s done
+#9 DONE 0.0s
+
+#10 [java 1/6] FROM docker.io/library/maven:3.9-eclipse-temurin-21-jammy@sha256:7f8422bd81f19b9035007a75e2f82272b09af64db08848d7d4e93302466e8b6f
+#10 resolve docker.io/library/maven:3.9-eclipse-temurin-21-jammy@sha256:7f8422bd81f19b9035007a75e2f82272b09af64db08848d7d4e93302466e8b6f 0.0s done
+#10 DONE 0.0s
+
+#11 [stage-2 1/4] FROM docker.io/library/eclipse-temurin:21-jre-jammy@sha256:dff6eb46527bd293a3c06bbbe9e64e8c9f91f01905b5abbdad31761c03059d2c
+#11 resolve docker.io/library/eclipse-temurin:21-jre-jammy@sha256:dff6eb46527bd293a3c06bbbe9e64e8c9f91f01905b5abbdad31761c03059d2c 0.0s done
+#11 DONE 0.0s
+
+#12 [internal] load build context
+#12 transferring context: 1.58kB done
+#12 DONE 0.0s
+
+#13 [nativo 5/5] RUN make libhuella.so          # gcc -O2 -Wall -Wextra -Werror -shared -fPIC
+#13 CACHED
+
+#14 [nativo 3/5] WORKDIR /src
+#14 CACHED
+
+#15 [stage-2 2/4] RUN useradd --system --uid 10001 --no-create-home huella
+#15 CACHED
+
+#16 [java 6/6] RUN mvn -q -B -DskipTests package
+#16 CACHED
+
+#17 [java 3/6] COPY huella-service/pom.xml .
+#17 CACHED
+
+#18 [stage-2 3/4] COPY --from=nativo /src/libhuella.so /opt/huella/lib/libhuella.so
+#18 CACHED
+
+#19 [java 2/6] WORKDIR /build
+#19 CACHED
+
+#20 [java 5/6] COPY huella-service/src ./src
+#20 CACHED
+
+#21 [nativo 2/5] RUN apt-get update  && apt-get install -y --no-install-recommends gcc make libc6-dev  && rm -rf /var/lib/apt/lists/*
+#21 CACHED
+
+#22 [nativo 4/5] COPY native/huella.h native/huella.c native/Makefile ./
+#22 CACHED
+
+#23 [java 4/6] RUN mvn -q -B dependency:go-offline
+#23 CACHED
+
+#24 [stage-2 4/4] COPY --from=java   /build/target/huella-service-1.0.0.jar /app/huella-service.jar
+#24 CACHED
+
+#25 exporting to image
+#25 exporting layers done
+#25 exporting manifest sha256:47cc586e98ae27e70808e329f21aa8067145fc338dc0b9ed889e7a450e44481a done
+#25 exporting config sha256:9952ba6c5ae492995c89f88a6a25c124957a2c3a41d4e30f63d1bc34606f009d done
+#25 exporting attestation manifest sha256:a76f4216ac53367c12c4f603019df0f770506a7ce8d360cffa1dc7caa06bf4de
+#25 exporting attestation manifest sha256:a76f4216ac53367c12c4f603019df0f770506a7ce8d360cffa1dc7caa06bf4de 0.0s done
+#25 exporting manifest list sha256:7a30e83ab9b2cf60f76451b45743e609255d20431681f3de908764396b984e7f 0.0s done
+#25 naming to docker.io/siliconminds/huella-service:1.0.0 done
+#25 unpacking to docker.io/siliconminds/huella-service:1.0.0 done
+#25 DONE 0.1s
+
+#26 resolving provenance for metadata file
+#26 DONE 0.0s
+ Image siliconminds/huella-service:1.0.0 Built 
+ Container banco-huella Creating 
+ Container banco-huella Created 
+Picked up JAVA_TOOL_OPTIONS: -Djna.library.path=/opt/huella/lib -XX:MaxRAMPercentage=50 -XX:+UseSerialGC -XX:MaxMetaspaceSize=80m -XX:ReservedCodeCacheSize=32m -Xss512k -Dstdout.encoding=UTF-8
+archivo=/tmp/banco-7465937370803542443.bin tamano=50.0 MB bloque=65536 bytes
+lado,corrida,descartada,segundos,MB_por_s
+C-JNA,1,true,0.3949,126.6
+C-JNA,2,true,0.3013,166.0
+C-JNA,3,true,0.3541,141.2
+C-JNA,4,false,0.2694,185.6
+C-JNA,5,false,0.2870,174.2
+C-JNA,6,false,0.2724,183.6
+C-JNA,7,false,0.2809,178.0
+C-JNA,8,false,0.2981,167.7
+MessageDigest,1,true,0.1812,275.9
+MessageDigest,2,true,0.0631,792.7
+MessageDigest,3,true,0.0609,820.7
+MessageDigest,4,false,0.0882,566.9
+MessageDigest,5,false,0.0507,987.1
+MessageDigest,6,false,0.0874,572.2
+MessageDigest,7,false,0.0535,934.4
+MessageDigest,8,false,0.0419,1193.0
+
+huella C   = 8ccd1adf12db6679d63a4ea4e88ef3c5557eb9e9b06b8337e43109b03fd61b48
+huella Java= 8ccd1adf12db6679d63a4ea4e88ef3c5557eb9e9b06b8337e43109b03fd61b48
+las dos huellas son idénticas
+mediana C vía JNA : 178.0 MB/s
+mediana MessageDigest: 934.4 MB/s
+C / Java = 0.19  (C NO es más rápido: reportar y explicar)
+--- memoria (docker stats) ---
+tiempo,uso_memoria
+17:28:06,44.02MiB / 128MiB
+17:28:08,90.35MiB / 128MiB
